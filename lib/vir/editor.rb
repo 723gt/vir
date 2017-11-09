@@ -33,7 +33,7 @@ module Vir
         end
           
         case key
-          when 127
+          when Curses::Key::DL,Curses::Key::BACKSPACE
             @win.setpos(y,x - 1)
             @win.delch
             x -= 1
@@ -57,7 +57,7 @@ module Vir
 
     def print_key_info(win,y,x,key)
       win.setpos(y,x)
-      win.addch(key)
+      win.addstr(key)
     end
   end
 end
