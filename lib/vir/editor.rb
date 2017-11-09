@@ -23,6 +23,7 @@ module Vir
 
       x = 0
       y = 0
+      taple_end = Array.new
 
       loop do
         key = nil
@@ -36,8 +37,16 @@ module Vir
           when Curses::Key::DL,Curses::Key::BACKSPACE
             @win.setpos(y,x - 1)
             @win.delch
-            x -= 1
+            if !x.zero?
+              x -= 1
+            else
+              if !@win.cury.zero?
+                y -= 1
+                x = taple_end[y]
+              end
+            end
           when 10
+            taple_end[y] = x
             x = 0
             y += 1
           else
